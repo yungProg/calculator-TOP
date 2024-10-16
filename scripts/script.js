@@ -22,8 +22,12 @@ function displayResult(convertedOperator) {
         case "×":
             convertedOperator = "*";
             break;
-        default:
-            convertedOperator = operator;
+        case "−":
+            convertedOperator = "-";
+            break;
+        case "+":
+            convertedOperator = "+";
+            break;
     }
     result = Function(`return ${firstNumber}${convertedOperator}${secondNumber}`)();
     console.log(result);
@@ -54,6 +58,8 @@ mathOperators.forEach(mathOperator => {
             firstNumber = firstNumber + operator + secondNumber;
             secondNumber = "";
         }
+        console.log(firstNumber);
+        
         displayExpression();
     })
 })
