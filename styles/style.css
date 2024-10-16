@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-size: 100%;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+}
+
+.container {
+    flex: 0 1 100%;
+    max-width: 480px;
+    outline: 1px solid black;
+    padding: 5px;
+}
+
+.expression-display,
+.result-display {
+    width: 100%;
+    font-size: clamp(24px, 2rem, 5vw);
+    text-align: right;
+    padding: 5px;
+}
+
+.calculator-btns-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.calculator-btns-wrapper > button {
+    flex: 0 0 calc((100% - 15px)/4);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    background-color: rgb(201, 253, 253);
+    font-size: clamp(24px, 2rem, 5vw);
+}
+
+.calculator-btns-wrapper > button:hover {
+    cursor: pointer;
+}
+
+.calculator-btns-wrapper > button:active {
+    opacity: 0.5;
+}
