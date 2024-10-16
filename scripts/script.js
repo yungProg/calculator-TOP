@@ -54,8 +54,8 @@ mathOperators.forEach(mathOperator => {
             operator = mathOperator.textContent;
         }
         if(secondNumber) {
-            operator = mathOperator.textContent;
             firstNumber = firstNumber + operator + secondNumber;
+            operator = mathOperator.textContent;
             secondNumber = "";
         }
         console.log(firstNumber);
