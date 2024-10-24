@@ -2,6 +2,7 @@ const numberInput = document.querySelectorAll(".number");
 const decimalPoint = document.querySelector(".decimal-point");
 const mathOperators = document.querySelectorAll(".math-operator");
 const equalSign = document.querySelector(".equals");
+const percentage = document.querySelector(".percentage");
 
 let firstNumber = "";
 let secondNumber = "";
@@ -114,5 +115,19 @@ equalSign.addEventListener("click", () => {
         return;
     } else {
         calculate(firstNumber, operator, secondNumber);
+    }
+})
+
+percentage.addEventListener("click", () => {
+    if (firstNumber && !operator) {
+        let firstNumberPercent = Number(firstNumber) / 100;
+        firstNumber = firstNumberPercent.toString();
+    } else if (firstNumber && operator && !secondNumber) {
+        let firstNumberPercent = Number(secondNumber) / 100;
+        firstNumber = firstNumberPercent.toString();
+        operator = "";
+    } else if (firstNumber && secondNumber) {
+        let secondNumberPercent = Number(secondNumber) / 100;
+        secondNumber = secondNumberPercent.toString();
     }
 })
