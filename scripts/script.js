@@ -3,6 +3,9 @@ const decimalPoint = document.querySelector(".decimal-point");
 const mathOperators = document.querySelectorAll(".math-operator");
 const equalSign = document.querySelector(".equals");
 const percentage = document.querySelector(".percentage");
+const negate = document.querySelector(".negate");
+const display = document.querySelector(".display");
+const clear = document.querySelector(".clear");
 
 let firstNumber = "";
 let secondNumber = "";
@@ -34,6 +37,19 @@ function divide(a, b) {
 }
 
 function takeInput(input) {
+    if (firstNumber.length == 10 && !operator && !secondNumber) {
+        return;
+    } 
+
+    if (secondNumber.length == 10) {
+        return;
+    }
+
+    if (firstNumber == "Infinity") {
+        firstNumber = input;
+        displayOperation();
+        return;
+    }
     if (!firstNumber && !operator) {
         if (input === ".") {
             firstNumber = "0.";
@@ -65,6 +81,7 @@ function takeInput(input) {
             secondNumber += input;
         }
     }
+    displayOperation();
     console.log(`${firstNumber} + ${operator} + ${secondNumber}`);
 }
 
@@ -89,11 +106,13 @@ function calculate(num1, op, num2) {
     console.log(`${firstNumber} ${operator} ${secondNumber} = ${solution}`)
     solution = solution.toString();
     firstNumber = solution;
+    operator = firstNumber == "Infinity" ? "" : operator;
     secondNumber = "";
+    displayOperation();
 }
 
 numberInput.forEach(item => {
-    item.addEventListener("click", () => takeInput(item.textContent))
+    item.addEventListener("click", () => takeInput(item.textContent));
 })
 decimalPoint.addEventListener("click", () => takeInput(decimalPoint.textContent))
 
@@ -123,11 +142,44 @@ percentage.addEventListener("click", () => {
         let firstNumberPercent = Number(firstNumber) / 100;
         firstNumber = firstNumberPercent.toString();
     } else if (firstNumber && operator && !secondNumber) {
-        let firstNumberPercent = Number(secondNumber) / 100;
+        let firstNumberPercent = Number(firstNumber) / 100;
         firstNumber = firstNumberPercent.toString();
         operator = "";
+        displayOperation();
+        firstNumber = "";
+        return;
     } else if (firstNumber && secondNumber) {
         let secondNumberPercent = Number(secondNumber) / 100;
         secondNumber = secondNumberPercent.toString();
     }
+    displayOperation();
+})
+
+negate.addEventListener("click", () => {
+    if (firstNumber && !operator) {
+        let firstNumberPercent = Number(firstNumber) * -1;
+        firstNumber = firstNumberPercent.toString();
+    } else if (firstNumber && operator && !secondNumber) {
+        let firstNumberPercent = Number(firstNumber) * -1;
+        firstNumber = firstNumberPercent.toString();
+    } else if (firstNumber && secondNumber) {
+        let secondNumberPercent = Number(secondNumber) * -1;
+        secondNumber = secondNumberPercent.toString();
+    }
+    displayOperation();
+})
+
+function displayOperation() {
+    if (!secondNumber) {
+        display.value = firstNumber;
+    } else {
+        display.value = secondNumber;
+    }
+}
+
+clear.addEventListener("click", () => {
+    firstNumber = "";
+    operator = "";
+    secondNumber = "";
+    displayOperation();
 })

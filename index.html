@@ -10,14 +10,14 @@
 <body>
     <div class="container">
         <div class="expression-display-wrapper">
-            <input type="text" class="expression-display" maxlength="10" readonly />
+            <input type="text" class="display" maxlength="10" readonly />
         </div>
         <div class="result-display-wrapper">
             <input type="text" class="result-display" maxlength="10" readonly />
         </div>
         <div class="calculator-btns-wrapper">
-            <button type="button">C</button>
-            <button type="button">()</button>
+            <button class="clear" type="button">AC</button>
+            <button class="negate" type="button">+/-</button>
             <button class="percentage" type="button">%</button>
             <button class="math-operator" type="button" value="/">&divide;</button>
             <button class="number" type="button">7</button>
@@ -32,8 +32,7 @@
             <button class="number" type="button">2</button>
             <button class="number" type="button">3</button>
             <button class="math-operator" type="button" value="+">&plus;</button>
-            <button type="button">+/-</button>
-            <button class="number" type="button">0</button>
+            <button class="number zero" id="zero" type="button">0</button>
             <button class="decimal-point" type="button">.</button>
             <button class="equals" type="button">&equals;</button>
         </div>

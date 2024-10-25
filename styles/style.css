@@ -25,7 +25,7 @@ body {
     padding: 5px;
 }
 
-.expression-display,
+.display,
 .result-display {
     width: 100%;
     font-size: clamp(24px, 2rem, 5vw);
@@ -56,4 +56,10 @@ body {
 
 .calculator-btns-wrapper > button:active {
     opacity: 0.5;
+}
+
+#zero {
+    flex: 2 1 0;
+    aspect-ratio: 2 / 1;
+    border-radius: 10rem;
 }
