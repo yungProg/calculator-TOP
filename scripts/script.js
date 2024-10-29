@@ -111,7 +111,7 @@ function calculate(num1, op, num2) {
     }
     solution = solution.toString();
     firstNumber = solution;
-    operator = firstNumber == "Infinity" ? "" : operator;
+    operator = firstNumber == "Error" ? "" : operator;
     secondNumber = "";
     displayOperation();
 }
