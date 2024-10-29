@@ -45,7 +45,7 @@ function takeInput(input) {
         return;
     }
 
-    if (firstNumber == "Infinity") {
+    if (firstNumber == "Error") {
         firstNumber = input;
         displayOperation();
         return;
@@ -88,19 +88,23 @@ function takeInput(input) {
 function calculate(num1, op, num2) {
     switch (op) {
         case "+":
-            solution = add(num1, num2);
+            const added = add(num1, num2);
+            solution = formatCalculation(added);
             break;
     
         case "-":
-            solution = subtract(num1, num2);
+            const subtracted = subtract(num1, num2);
+            solution = formatCalculation(subtracted);
             break;
 
         case "*":
-            solution = multiply(num1, num2);
+            const multiplied = multiply(num1, num2);
+            solution = formatCalculation(multiplied);
             break;
 
         case "/":
-            solution = divide(num1, num2);
+            const divided = divide(num1, num2);
+            solution = formatCalculation(divided);
             break;
     }
     console.log(`${firstNumber} ${operator} ${secondNumber} = ${solution}`)
@@ -114,6 +118,7 @@ function calculate(num1, op, num2) {
 numberInput.forEach(item => {
     item.addEventListener("click", () => takeInput(item.textContent));
 })
+
 decimalPoint.addEventListener("click", () => takeInput(decimalPoint.textContent))
 
 mathOperators.forEach(item => {
@@ -183,3 +188,34 @@ clear.addEventListener("click", () => {
     secondNumber = "";
     displayOperation();
 })
+
+function formatCalculation (number, maxDigits = 10) {
+    const num = Number(number);
+    if (!Number.isFinite(num)) {
+        return "Error"
+    }
+
+    const isWholeNumber = Number.isInteger(num);
+    const numStr = num.toString();
+
+    if (isWholeNumber && numStr.length <= maxDigits) {
+        return numStr;
+    }
+
+    if (Math.abs(num) >= Math.pow(10, maxDigits) || Math.abs(num) < Math.pow(10, -maxDigits)) {
+        return num.toExponential(maxDigits - 6).replace(/\.?0+e/, "e");
+    }
+
+    if (isWholeNumber) {
+        const parts = numStr.split(".");
+        const integerPart = parts[0].length;
+        const availableDecimalPlaces = maxDigits - integerPart - 1;
+
+        if (availableDecimalPlaces > 0) {
+            const rounded = Number(num.toFixed(availableDecimalPlaces));
+            return rounded.toString()
+        }
+    }
+
+    return num.toPrecision(maxDigits).replace(/\.?0+$/, "");
+}
