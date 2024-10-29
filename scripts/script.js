@@ -1,3 +1,4 @@
+const container = document.querySelector(".container");
 const numberInput = document.querySelectorAll(".number");
 const decimalPoint = document.querySelector(".decimal-point");
 const mathOperators = document.querySelectorAll(".math-operator");
@@ -6,6 +7,8 @@ const percentage = document.querySelector(".percentage");
 const negate = document.querySelector(".negate");
 const display = document.querySelector(".display");
 const clear = document.querySelector(".clear");
+const acceptedKeys = "0123456789.";
+const acceptableOperators = "+-*/"
 
 let firstNumber = "";
 let secondNumber = "";
@@ -119,19 +122,21 @@ numberInput.forEach(item => {
     item.addEventListener("click", () => takeInput(item.textContent));
 })
 
-decimalPoint.addEventListener("click", () => takeInput(decimalPoint.textContent))
+decimalPoint.addEventListener("click", () => takeInput(decimalPoint.textContent));
+
+function handleMathOperators (item) {
+    if (!operator) {
+        operator = item;
+    } else if (operator && firstNumber && !secondNumber) {
+        operator = item;
+    } else if (operator && secondNumber) {
+        calculate(firstNumber , operator, secondNumber);
+        operator = item;
+    }
+}
 
 mathOperators.forEach(item => {
-    item.addEventListener("click", () => {
-        if (!operator) {
-            operator = item.value;
-        } else if (operator && firstNumber && !secondNumber) {
-            operator = item.value;
-        } else if (operator && secondNumber) {
-            calculate(firstNumber , operator, secondNumber);
-            operator = item.value;
-        }
-    })
+    item.addEventListener("click", () => handleMathOperators(item.value))
 })
 
 equalSign.addEventListener("click", () => {
@@ -219,3 +224,18 @@ function formatCalculation (number, maxDigits = 10) {
 
     return num.toPrecision(maxDigits).replace(/\.?0+$/, "");
 }
+
+//accept keyboard inputs
+
+document.addEventListener("keydown", (e) => {
+    let key = e.key;   
+    if (acceptedKeys.includes(key)) {
+        takeInput(key)
+    }
+    if (acceptableOperators.includes(key)) {
+        handleMathOperators(key);
+    }
+    if (key === "Enter") {
+        calculate(firstNumber, operator, secondNumber)
+    }
+})
