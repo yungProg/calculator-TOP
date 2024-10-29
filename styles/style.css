@@ -25,12 +25,26 @@ body {
     padding: 5px;
 }
 
+.display {
+    border: none;
+    border-bottom: 1px solid #cccccc;
+}
+
 .display,
 .result-display {
     width: 100%;
     font-size: clamp(24px, 2rem, 5vw);
     text-align: right;
     padding: 5px;
+}
+
+.del {
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    background-color: transparent;
+    display: block;
+    margin-left: auto;
 }
 
 .calculator-btns-wrapper {
@@ -50,7 +64,7 @@ body {
     font-size: clamp(24px, 2rem, 5vw);
 }
 
-.calculator-btns-wrapper > button:hover {
+button:hover {
     cursor: pointer;
 }
 

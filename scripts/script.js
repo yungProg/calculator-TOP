@@ -1,4 +1,3 @@
-const container = document.querySelector(".container");
 const numberInput = document.querySelectorAll(".number");
 const decimalPoint = document.querySelector(".decimal-point");
 const mathOperators = document.querySelectorAll(".math-operator");
@@ -7,6 +6,7 @@ const percentage = document.querySelector(".percentage");
 const negate = document.querySelector(".negate");
 const display = document.querySelector(".display");
 const clear = document.querySelector(".clear");
+const delBtn = document.querySelector(".del");
 const acceptedKeys = "0123456789.";
 const acceptableOperators = "+-*/"
 
@@ -238,4 +238,16 @@ document.addEventListener("keydown", (e) => {
     if (key === "Enter") {
         calculate(firstNumber, operator, secondNumber)
     }
+})
+
+delBtn.addEventListener("click", () => {
+    if (!secondNumber) {
+        firstNumber = firstNumber.slice(0, firstNumber.length - 1)
+    } else if (!secondNumber && operator) {
+        firstNumber = firstNumber.slice(0, firstNumber.length - 1);
+        operator = "";
+    } else {
+        secondNumber = secondNumber.slice(0, secondNumber.length - 1)
+    }
+    displayOperation();
 })
