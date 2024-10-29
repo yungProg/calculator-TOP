@@ -85,7 +85,6 @@ function takeInput(input) {
         }
     }
     displayOperation();
-    console.log(`${firstNumber} + ${operator} + ${secondNumber}`);
 }
 
 function calculate(num1, op, num2) {
@@ -110,7 +109,6 @@ function calculate(num1, op, num2) {
             solution = formatCalculation(divided);
             break;
     }
-    console.log(`${firstNumber} ${operator} ${secondNumber} = ${solution}`)
     solution = solution.toString();
     firstNumber = solution;
     operator = firstNumber == "Infinity" ? "" : operator;
